@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/fonts.css">
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/mathinput.css">
+    <link rel="stylesheet" href="styles/checkpoint.css">
+    <link rel="stylesheet" href="styles/mobile.css">
+    <title>Tricky</title>
+
+    <link rel="stylesheet" href="lib/katex/katex.min.css"
+        integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    <script defer src="lib/katex/katex.min.js"
+        integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8"
+        crossorigin="anonymous"></script>
+
+    <script defer src="lib/katex/contrib/auto-render.min.js"
+        integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+        crossorigin="anonymous"></script>
+    <script src="scripts/autotex.js"></script>
+    <script defer type="module" src="scripts/mathinput.js"></script>
+</head>
+
+<body>
+    <div id="math-input-template" class="math-input">
+        <textarea class="math-input-textarea monospaced" spellcheck="false"
+            placeholder="Type your answer here..."></textarea>
+        <div class="math-input-output-wrap">
+            <div class="math-input-tex-area"></div>
+            <div class="math-input-error-area monospaced" style="display: none;">
+                <span class="math-input-error-box"></span>
+                <br>
+                <span class="math-input-error-msg"></span>
+            </div>
+        </div>
+    </div>
+
+    <div id="menu-background" class="mobile-only hidden"></div>
+    <div id="main-wrap">
+        <div id="question-sidebar" tabindex="-1">
+            <div id="question-sidebar-wrap" class="invisible">
+                <button data-target-elem="welcome-page" class="sidebar-button">
+                    <span class="material-icons inline-big">
+                        waving_hand
+                    </span>
+                    <span><strong>Welcome</strong></span>
+                </button>
+                <button data-target-elem="tutorial-page" class="sidebar-button">
+                    <span class="material-icons inline-big">
+                        import_contacts
+                    </span>
+                    <span><strong>Tutorial</strong></span>
+                </button>
+                <hr class="mo-mobile">
+                <button data-question-name="easy" class="question-sidebar-button sidebar-button">
+                    <span class="inline-circle"></span>
+                    <span class="question-name">Arithmetic</span>
+                </button>
+                <button data-question-name="unixtime" class="question-sidebar-button sidebar-button">
+                    <span class="inline-circle"></span>
+                    <span class="question-name">Timezones</span>
+                </button>
+                <button data-question-name="profile" class="question-sidebar-button sidebar-button">
+                    <span class="inline-circle"></span>
+                    <span class="question-name">Spin</span>
+                </button>
+                <button data-question-name="empirical" class="question-sidebar-button sidebar-button">
+                    <span class="inline-circle"></span>
+                    <span class="question-name">Empirically Empirical</span>
+                </button>
+                <button data-checkpoint-name="cp1" class="checkpoint-sidebar-button sidebar-button">
+                    <span class="inline-big material-icons">flag</span>
+                    <span><strong>Checkpoint 1</strong></span>
+                </button>
+                <hr class="mo-mobile">
+                <button data-question-name="leapyear" class="question-sidebar-button sidebar-button">
+                    <span class="inline-circle"></span>
+                    <span class="question-name">Leap Years</span>
+                </button>
+                <button data-question-name="passant" class="question-sidebar-button sidebar-button">
+                    <span class="inline-circle"></span>
+                    <span class="question-name">En Passant</span>
+                </button>
+                <button data-question-name="quadratic" class="question-sidebar-button sidebar-button">
+                    <span class="inline-circle"></span>
+                    <span class="question-name">Quadratic Roots</span>
+                </button>
+                <button data-checkpoint-name="cp2" class="checkpoint-sidebar-button sidebar-button">
+                    <span class="inline-big material-icons">flag</span>
+                    <span><strong>Checkpoint 2</strong></span>
+                </button>
+                <hr class="mo-mobile">
+                <button data-question-name="panda" class="question-sidebar-button sidebar-button">
+                    <span class="inline-circle"></span>
+                    <span class="question-name">Red Panda</span>
+                </button>
+                <button data-question-name="rotation" class="question-sidebar-button sidebar-button">
+                    <span class="inline-circle"></span>
+                    <span class="question-name">Rotation Matrix</span>
+                </button>
+                <button data-checkpoint-name="cp3" class="checkpoint-sidebar-button sidebar-button">
+                    <span class="inline-big material-icons">flag</span>
+                    <span><strong>Checkpoint 3</strong></span>
+                </button>
+                <hr class="mo-mobile">
+                <button data-question-name="recursion" class="question-sidebar-button sidebar-button">
+                    <span class="inline-circle"></span>
+                    <span class="question-name">Recursive Function</span>
+                </button>
+                <button data-question-name="hastring" class="question-sidebar-button sidebar-button">
+                    <span class="inline-circle"></span>
+                    <span class="question-name">HA-String</span>
+                </button>
+                <button data-question-name="hagoteem" class="question-sidebar-button sidebar-button">
+                    <span class="inline-circle"></span>
+                    <span class="question-name">BAH-String</span>
+                </button>
+                <button data-checkpoint-name="cp4" class="checkpoint-sidebar-button sidebar-button">
+                    <span class="inline-big material-icons">flag</span>
+                    <span><strong>Checkpoint 4</strong></span>
+                </button>
+                <hr class="mo-mobile">
+                <button data-question-name="analytic" class="question-sidebar-button sidebar-button">
+                    <span class="inline-circle"></span>
+                    <span class="question-name">Functional Equation</span>
+                </button>
+                <button data-question-name="derivative" class="question-sidebar-button sidebar-button">
+                    <span class="inline-circle"></span>
+                    <span class="question-name">n-th Level Derivative</span>
+                </button>
+                <button data-checkpoint-name="cp5" class="checkpoint-sidebar-button sidebar-button">
+                    <span class="inline-big material-icons">flag</span>
+                    <span><strong>Checkpoint 5</strong></span>
+                </button>
+                <hr class="mo-mobile">
+                <button data-question-name="checkers" class="question-sidebar-button sidebar-button">
+                    <span class="inline-circle"></span>
+                    <span class="question-name">Checkers...?</span>
+                </button>
+                <button data-question-name="fibonacci" class="question-sidebar-button sidebar-button">
+                    <span class="inline-circle"></span>
+                    <span class="question-name">Fibonacci Sum</span>
+                </button>
+                <button data-checkpoint-name="cp6" class="checkpoint-sidebar-button sidebar-button">
+                    <span class="inline-big material-icons">flag</span>
+                    <span><strong>Checkpoint 6</strong></span>
+                </button>
+                <hr class="mo-mobile">
+                <button data-target-elem="info-page" class="sidebar-button">
+                    <span class="material-icons inline-big">
+                        info
+                    </span>
+                    <span><strong>Information &amp; Privacy</strong></span>
+                </button>
+            </div>
+        </div>
+
+        <div id="checkpoint-area-template" class="main-page checkpoint-page content-page">
+            <h1>Checkpoint</h1>
+            <p>This checkpoint will check your answers to questions <span class="checkpoint-question-list"></span>.</p>
+            <button class="check-answers-button">Check Answers</button>
+            <div class="checkpoint-output-box vert-center">
+                <div class="checkpoint-success" style="display: none;">
+                    <span class="checkpoint-success-ign" style="display: none">
+                        All checked answers are correct. Checkpoint code:
+                        <br>
+                        <div class="checkpoint-code-output monospaced">
+
+                        </div>
+                    </span>
+                    <span class="checkpoint-success-noign" style="display: none">
+                        All checked answers are correct.
+                    </span>
+                </div>
+                <div class="checkpoint-fail" style="display: none;">
+                    Sorry, at least one of your answers are incorrect.
+                    <span class="checkpoint-fail-more-info">
+                        Please also note that your answer to question <span
+                            class="inline-circle checkpoint-fail-question"></span>
+                        gave an undefined value for the input:
+                        <div class="checkpoint-fail-inputs"></div>
+                        Please make sure you are not dividing by zero, or putting too large parameters into factorials
+                        or exponentials.
+                    </span>
+                </div>
+                <div class="checkpoint-error" style="display: none;">
+                    There was a problem evaluating your answer to question <span
+                        class="inline-circle checkpoint-error-question"></span>.
+                    <hr>
+                    <div class="checkpoint-error-output monospaced">
+                        <span class="checkpoint-error-box"></span>
+                        <br>
+                        <span class="checkpoint-error-msg"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="loading-screen" class="vert-center hidden">
+            <div>
+                Loading math libraries and questions... please wait...
+            </div>
+        </div>
+
+        <div id="question-area" class="vert-center invisible" tabindex="-1">
+            <div id="welcome-page" class="main-page content-page">
+                <h1>Welcome</h1>
+                <p>
+                    This is a cleaned version of my 2024 maths test to serve as a more formal demo for my <a class="mono"
+                        href="https://github.com/CAG2Mark/wasm-math-evaluator/" target="_blank">wasm-math-evaluator</a>
+                    library.
+                </p>
+                <p>
+                    If you want to see the original version, you can <a href="https://mathstest2024.markng.com/">find it here</a>.
+                    Excuse the silliness, as it was made as a joke.
+                </p>
+            </div>
+            <div id="info-page" class="main-page">
+                <h1>Privacy</h1>
+                <p>
+                    This website is purely client-side and does not store identifiable user data on any server. The
+                    developer has made no efforts to send any user-generated data to any server. This can be verified by
+                    viewing the source code of this project.
+                <p>
+                    However, this site is hosted on Cloudflare Pages, and hence is on Cloudflare's network. Thus, usage
+                    of this site may be subject to Cloudflare's privacy policy, available
+                    <a href="https://www.cloudflare.com/en-gb/privacypolicy/" target="_blank">here</a>. In
+                    this case, you would be categorised as an End User, and a Website Visitor should you access
+                    Cloudflare's website for the purpose of viewing the privacy policy.
+                </p>
+                <p>
+                    All required libraries and files are in this website's repository, and thus no requests
+                    are made to any server other than those CloudFlare's CDN.
+                </p>
+                <p>
+                    Your previous answers, and information about completed checkpoints are saved between sessions
+                    using your browser's local storage. This data is not accessible by the developer.
+                </p>
+                </p>
+                <h1>This Website is Open Source</h1>
+                <p>
+                    Source Code and License:
+                    <a href="https://github.com/CAG2Mark/MathsTestCleaned" target="_blank">GitHub</a>,
+                    <a href="https://github.com/CAG2Mark/MathsTestCleaned/blob/main/LICENSE.md">AGPL v3 License</a>.
+                </p>
+                <h1>Open Source Licenses</h1>
+                <p>
+                    KaTeX: <a href="https://github.com/KaTeX/KaTeX/blob/main/LICENSE" target="_blank">MIT License</a>.
+                </p>
+                <p>
+                    wasm-math-evaluator:
+                    <a href="https://github.com/CAG2Mark/wasm-math-evaluator/" target="_blank">GitHub</a>,
+                    <a href="https://github.com/CAG2Mark/wasm-math-evaluator/blob/main/LICENSE.md" target="_blank">GPL
+                        v2 License</a>.
+                </p>
+                <p>
+                    Inter Font: <a href="fonts/inter/license.txt" target="_blank">OFL License</a>.
+                </p>
+                <p>
+                    JetBrains Mono Font: <a href="fonts/JetBrains-Mono-LICENSE-OFL.txt" target="_blank">OFL License</a>.
+                </p>
+                <p>
+                    Material icons: <a href="fonts/material-icons-LICENSE-APACHE.txt" target="_blank">Apache
+                        License</a>.
+                </p>
+
+            </div>
+            <div id="tutorial-page" class="main-page content-page">
+                <h1>Tutorial</h1>
+                <p>
+                    When asked for an answer, you will need to input a mathematical expression.
+                    This could be a number or a function, depending on the question. <strong>Your answer
+                        will be checked to a higher precision than most calculators can handle, so
+                        please input your answers exactly</strong> (or, if you must, to 25 significant figures. :P)
+                </p>
+                <p>
+                    If you are sure your simplified expression is exactly the correct answer, then you
+                    can enter it. However, if the answer is something like $2\pi$, do not enter $6.28$
+                    or any other approximation. Just directly enter <span class="mono">2pi</span>.
+                </p>
+                <p>
+                    For example, if the question is asking for the value of $2+2$, you can input <span
+                        class="mono">4</span>,
+                    <span class="mono">2+2</span>, <span class="mono">1+3</span> or similar:
+                </p>
+                <div class="math-input" id="tut1"></div>
+                <p>
+                    As you may have noticed, the input box doubles as a calculator. You can use
+                    many standard mathematical functions in your input. All available functions are
+                    <span class="mono">sin, cos, tan, arcsin, arccos, arctan, sinh, cosh, tanh,
+                        arsinh, arcosh, artanh, exp, ln, sqrt, sgn, floor, ceil, abs, nCr, nPr, atan2</span>.
+                    The available operators are <span class="mono">+, -, *, /, %, ^, !</span>.
+                </p>
+                <p>
+                    For example, if the answer is $\sqrt{\left(\binom{10}{5} \mod 4\right) + (\sin 5)^2}$, you could
+                    type
+                    <span class="mono">sqrt(nCr(10, 5) % 4 + (sin5)^2</span>. Note that brackets
+                    can be left open.
+                </p>
+                <div class="math-input" id="tut2"></div>
+                <p>
+                    Sometimes, you will need to input a function or expression of some variables as the answer.
+                    For example, if you are asked to find $\sin(a + b)$, you could type
+                    <span class="mono">sin a cos b + sin b cos a</span> or <span class="mono">sin(a+b)</span>.
+                </p>
+                <div class="math-input" id="tut3"></div>
+                <p>
+                    You can also define variables within your answer. For example, if you need to compute
+                    $\sin\frac{x^2+4}{|\sin x|} + \sqrt{\frac{x^2+4}{|\sin x|}} + (\frac{x^2+4}{|\sin x|} )!$, you can
+                    type <span class="mono">let r = sin((x^2+4)/abs sin x); sin r + sqrt r + r!</span> instead of
+                    typing out the whole thing.
+                </p>
+                <div class="math-input" id="tut4"></div>
+            </div>
+            <div data-question-name="easy" class="main-page question-page content-page">
+                <h1>
+                    Arithmetic
+                </h1>
+                <p>
+                    What is $180 - 42 - 42$?
+                </p>
+                <div class="math-input" data-answer-name="ans"></div>
+            </div>
+            <div data-question-name="unixtime" class="main-page question-page content-page">
+                <h1>Timezones</h1>
+                <p>
+                    What is the UNIX time (in seconds) of 22/5/2015 10:55:39pm HKT? 	
+                </p>
+                <div class="math-input" data-answer-name="ans"></div>
+            </div>
+            <div data-question-name="profile" class="main-page question-page content-page">
+                <h1>Spin</h1>
+                <p>
+                    Suppose a rectangle spins clockwise at a rate of $2918572878278522^\circ$ per second.
+                </p>
+                <p>
+                    After $2817274$ seconds, how many degrees would this rectangle be rotated clockwise from its
+                    original position? Give your answer as a positive integer that is as small as possible.
+                </p>
+                <p>
+                    For example, if you think the answer is $362^\circ$, your answer should evaluate to <span
+                        class="mono">2</span>.
+                </p>
+                <div class="math-input" data-answer-name="ans"></div>
+            </div>
+            <div data-question-name="empirical" class="main-page question-page content-page">
+                <h1>Empirically Empirical</h1>
+                <p>
+                    Suppose the $\mu$-ness of $\mathcal{R}$, denoted $\sigma(\mathcal{R})$ is related to its $v$-ness
+                    $\mu_v$, $\upsilon$-ness $\rho_v$, $i$-ness $v_\upsilon$ and highness $\upsilon_v$, and $D$-ness
+                    $\mathbb{D}$. They are empirically linked by the equation:
+                    \[
+                    \sigma(\mathcal{R}) = \frac{\arctan(0.4412852^{\upsilon_v
+                    v_\upsilon^{1.002412}})}{\mathbb{D}\mu_{\upsilon} \rho_{v}}
+                    \]
+                    with the formulae $\mu_v = \frac{1}{\mu_\upsilon}$, $\rho_v = \frac{1}{\sqrt[0.441285]{\rho_v}}$. It
+                    is
+                    assumed that
+                    \[
+                    -\frac{\pi}{2} &lt \sigma(\mathcal{R})\mathbb{D}\mu_{\upsilon} \rho_{v} &lt \frac{\pi}{2} \] Given
+                    that
+                    the
+                    $\mu$-ness of $\mathcal{R}$ is $0.69$, $i$-ness is $0.4$, $D$-ness is $0.6$ and $v$-ness is $0.4$,
+                    what is the highness of $\mathcal{R}$? (Please note that $v$ and $\upsilon$ are different
+                    characters; one is slightly wider than the other. Therefore, it is advised to use a magnifying glass
+                    and ruler for this question.)
+                </p>
+                <p>
+                    (Hint: Any typo you think you see is probably intentional.)
+                </p>
+                <div class="math-input" data-answer-name="ans"></div>
+            </div>
+            <div data-question-name="leapyear" class="main-page question-page content-page">
+                <h1>Leap Years</h1>
+                <p>
+                    Suppose we randomly pick a day between the first day of 2000 and the last day of
+                    9999 inclusive. Assume all days have an equal probability of being picked. What is the probability
+                    we
+                    pick leap day, i.e. the 29th of February?
+                </p>
+                <div class="math-input" data-answer-name="ans"></div>
+            </div>
+            <div data-question-name="passant" class="main-page question-page content-page">
+                <h1>En Passant</h1>
+                <p>
+                    In chess, a pawn can move ahead two squares on its first move. If it does so, and lands adjacent to
+                    an
+                    enemy pawn, it may be captured by that enemy pawn. This is known as <i>en passant</i>.</p>
+                <p>
+                    For this question, define two occurences of en passant to be <i>different</i> if any of the
+                    following
+                    are true:
+                <ul>
+                    <li>The pawn being captured is different. Two pawns are different if they originated from different
+                        files
+                        or are different colours.</li>
+                    <li>The capturing pawn is different.
+                    </li>
+                    <li>The pawn was captured from a different file. For example, suppose the black pawn on the $c$ file
+                        was captured en passant. Two different ways for this to happen is if the the white pawn was on
+                        the $b$ file or the $d$ file.
+                    </li>
+                </ul>
+                </p>
+                <p>
+                    Assume a standard $8 \times 8$ chess board and standard chess rules. Assume no pawn promotions
+                    occur. How many <i>different</i> ways are there for en passant to theoretically occur? (Don't forget
+                    to account for both players capturing.)
+                </p>
+
+                <div class="math-input" data-answer-name="ans"></div>
+            </div>
+
+            <div data-question-name="quadratic" class="main-page question-page content-page">
+                <h1>Quadratic Roots</h1>
+                <p>
+                    Consider the quadratic function:
+                    \[
+                    f(x) = x^2 \sin^2 a + 2x \cos a - 1
+                    \]
+                    What is the smallest positive value of $a$ such that $f(x)$ has a root at $x = 1$?
+                </p>
+                <div class="math-input" data-answer-name="ans"></div>
+            </div>
+
+            <div data-question-name="panda" class="main-page question-page content-page">
+                <h1>Red Panda</h1>
+                <p>
+                    Suppose there are $27$ red pandas in a zoo and there are $3$ zookeepers who have been assigned to
+                    take care of these red pandas.
+                </p>
+                <p>
+                    The zoo policy states each zookeeper has to take care of at least $3$ red pandas. How many ways are
+                    there to assign each red panda to a zookeeper so that this requirement is met?
+                </p>
+                <p>
+                    (Hint: $|A \cup B \cup C| = |A| + |B| + |C| - |A \cap B| - |B \cap C| - |C \cap A| + |A \cap B \cap
+                    C|$.)
+                </p>
+
+                <div class="math-input" data-answer-name="ans"></div>
+            </div>
+            <div data-question-name="rotation" class="main-page question-page content-page">
+                <h1>Rotation Matrix</h1>
+                <p>
+                    Consider the matrix for $(a, b) \neq (0, 0)$:
+                    \[
+                    A = \begin{bmatrix}
+                    a & -b\\
+                    b & a
+                    \end{bmatrix}.
+                    \]
+                    First, note that $A$ is a rotation matrix multiplied by some positive constant, i.e.
+                    \[
+                    \begin{bmatrix}
+                    a & -b\\
+                    b & a
+                    \end{bmatrix}
+                    =
+                    c \begin{bmatrix}
+                    \cos \theta & -\sin \theta\\
+                    \sin \theta & \cos \theta
+                    \end{bmatrix}
+                    \]
+                    for some $\theta$ and $c &gt; 0$. Please give the value of that $c$ below in terms of $a$ and $b$.
+                </p>
+                <div class="math-input" data-answer-name="constant"></div>
+                <p>
+                    Now, give a closed form expession for $A^n$ for integers $n$. Note $A^n$ is also a $2 \times 2$
+                    matrix.
+                    You may want to use the function <span class="mono">atan2(y, x)</span>.
+                </p>
+
+                <p>
+                    Top left term of $A^n$:
+                </p>
+                <div class="math-input" data-answer-name="ii"></div>
+                <p>
+                    Top right term of $A^n$:
+                </p>
+                <div class="math-input" data-answer-name="ij"></div>
+                <p>
+                    Bottom left term of $A^n$:
+                </p>
+                <div class="math-input" data-answer-name="ji"></div>
+                <p>
+                    Bottom right term of $A^n$:
+                </p>
+                <div class="math-input" data-answer-name="jj"></div>
+            </div>
+            <div data-question-name="recursion" class="main-page question-page content-page">
+                <h1>Recursive Function</h1>
+                <p>
+                    For $a, b \in \mathbb R$, consider the function $H$ defined on the non-negative integers $n, k \geq
+                    0$:
+                    \[
+                    H(n,k) = \begin{cases}
+                    1 & n = 0, k = 0\\
+                    1 + aH(k-1, 0) + bH(0, k-1) & n = 0, k \neq 0\\
+                    1 + aH(n-1, 0) + bH(0, n-1) & n \neq 0, k = 0\\
+                    1 + aH(n-1, k) + bH(n, k-1) & \text{otherwise}.
+                    \end{cases}
+                    \]
+                    Find a closed form expression for $H(n, k)$ in terms of $n, k, a, b$. You may assume $a + b \neq 1$.
+                </p>
+                <p>
+                    (Hint: Try solving it for $a = 1, b = 1$ first.)
+                </p>
+                <div class="math-input" data-answer-name="ans"></div>
+            </div>
+            <div data-question-name="hastring" class="main-page question-page content-page">
+                <h1>HA-String</h1>
+                <p>
+                    A $HA$-string is a string of uppercase characters that can be permuted into a sequence of zero or
+                    more $HA$, optionally followed by an $H$. For example, $AHAHAHAH$, $AAAHHHH$ and $H$ are all
+                    $HA$-strings, as they can be permuted into $HAHAHAHA$, $HAHAHAH$ and $H$ respectively. However,
+                    $HAHAAHAA$ is not a $HA$-string. The empty string is a $HA$-string.
+                </p>
+                <p>
+                    How many $HA$-strings of length $n$ are there for $n \geq 0$? You can type <span
+                        class="mono">floor(x)</span> to
+                    represent $\lfloor x \rfloor$ and <span class="mono">ceil(x)</span> to
+                    represent $\lceil x \rceil$.
+                </p>
+                <div class="math-input" data-answer-name="ans"></div>
+            </div>
+            <div data-question-name="hagoteem" class="main-page question-page content-page">
+                <h1>BAH-String</h1>
+                <p>
+                    A $BAH$-string is a string of uppercase characters such that its Levenshtein distance from
+                    some $HA$-string is $1$. In other words, you can delete, insert, or modify exactly one character
+                    from any $HA$-$GOTEEM$-string such that the resulting string is a $HA$-string.
+                </p>
+                <p>
+                    For example: $GAH$, $HA$ and $AAAGHHH$ are all $BAH$-strings.
+                </p>
+                <p>
+                    How many $BAH$-strings of length $n$ are there for $n \geq 0$?
+                </p>
+                <p>
+                    You may assume that $\binom{a}{b} = 0$ for $a, b \in \mathbb Z$ if $a &lt; b$ or $b &lt; 0$. You
+                    may also want to define constants using <span class="mono">let</span> (see the tutorial page).
+                </p>
+                <div class="math-input" data-answer-name="ans"></div>
+            </div>
+            <div data-question-name="analytic" class="main-page question-page content-page">
+                <h1>Functional Equation</h1>
+                <p>
+                    Suppose that for some fixed $C \in \mathbb R$, an (analytic) function $f(x)$ on $\mathbb{R}$ is
+                    characterised by
+                    \[
+                    f(f(x)) - f(x) - x = C
+                    \]
+                    Find the $f(x)$ satisfying this constraint that has the largest $f'(0)$.
+                </p>
+                <div class="math-input" data-answer-name="function"></div>
+                <p>
+                    Also, how many such functions are there?
+                </p>
+                <div class="math-input" data-answer-name="howmany"></div>
+            </div>
+            <div data-question-name="derivative" class="main-page question-page content-page">
+                <h1>n-th Level Derivative</h1>
+                <p>
+                    Let $f : \mathbb{R} \to \mathbb{R}$ be differentiable at $x_0$. Let:
+                    \[
+                    \begin{align*}
+                    f_0(x, h) &= h\\
+                    f_n(x, h) &= f(x + f_{n-1}(x, h)) - f(x)
+                    \end{align*}
+                    \]
+                </p>
+                <p>
+                    Define the <i>$n$-th level derivative</i> of $f$ to be:
+                    \[
+                    \frac{d_n}{dx}f(x) = \lim_{h \to 0} \frac{f_n(x, h)}{h}
+                    \]
+                    Express $\frac{d_n}{dx}f(x_0)$ in terms of $f'(x_0)$ for $n \geq 0$. You may use $F$ to denote
+                    $f'(x_0)$.
+                </p>
+                <p>
+                    (You may be tempted to use L'hopital's rule. However, it requires that $f$ is differentiable on an
+                    open interval containing $x_0$, except possibly at $x_0$ itself, which is not a given condition.)
+                </p>
+
+                <div class="math-input" data-answer-name="ans"></div>
+            </div>
+            <div data-question-name="checkers" class="main-page question-page content-page">
+                <h1>Checkers...?</h1>
+                <p>
+                    Suppose you want to arrange red and green checkers on an $8 \times 8$ red and green checkboard in a
+                    certain way.
+                </p>
+                <p>
+                    You can place red checkers on green tiles and green checkers on red tiles, but no green checker may
+                    be adjacent to a red checker.
+                </p>
+                <p>
+                    How many valid ways are there to arrange the red and green checkers? Note that an empty board also
+                    counts as a valid arrangement.
+                </p>
+                <p>
+                    Note: There is no known general formula.
+                </p>
+                <div class="math-input" data-answer-name="ans"></div>
+            </div>
+            <div data-question-name="fibonacci" class="main-page question-page content-page">
+                <h1>Fibonacci Sum</h1>
+                <p>
+                    Recall the Fibonacci numbers $F_n := 1, 1, 2, 3, 5, 8, 13, \cdots$.
+                </p>
+                <p>
+                    Suppose two Fibonacci numbers $x_1, x_2$ are independently drawn at random with uniform probability.
+                    What is the probability that $x_1 + x_2$ shares a factor with $69$ other than $1$?
+                </p>
+                <p>
+                    If you do not like the notion of drawing a random integer that could be arbitrarily large, find or
+                    bound the probability with the restriction $x_1, x_2 &lt; N$ for any $N$ and take $N \to \infty$.
+                </p>
+                <div class="math-input" data-answer-name="ans"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="lib/sha256.js"></script>
+<script src="lib/aes.js"></script>
+<script type="module" src="scripts/questiondata.js?version=2"></script>
+<script type="module" src="scripts/ui.js"></script>
+<script type="module" src="scripts/tutorial.js"></script>
+<script type="module" src="scripts/main.js"></script>
+
+</html>

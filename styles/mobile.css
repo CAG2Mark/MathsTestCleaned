@@ -1,0 +1,63 @@
+@media screen and (min-width: 851px) {
+    .mobile-only {
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .mo-mobile {
+        display: none !important;
+    }
+
+    #main-wrap {
+        display: grid;
+        grid-template-rows: 1fr 56px;
+        grid-template-columns: 1fr;
+    }
+
+    #loading-screen, #question-area {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    #question-sidebar {
+        grid-column: 1;
+        grid-row: 2;
+
+        justify-content: left;
+    }
+
+    #question-sidebar-wrap {
+        display: flex;
+        flex-direction: row;
+        width: auto;
+
+        padding: 0 8px;
+    }
+    
+    .question-name {
+        display: none !important;
+    }
+
+    .sidebar-button {
+        height: 40px;
+        justify-content: center;
+        align-items: center;
+        flex: auto; 
+        white-space: nowrap;
+    }
+
+    .question-sidebar-button {
+        grid-template-columns: 1fr 0;
+        width: 40px !important;
+    }    
+
+    .checkpoint-sidebar-button {
+        margin: 2px 4px;
+        padding-right: 16px;
+    }
+
+    .main-page > .math-input {
+        height: 180px;
+    }
+}
