@@ -1,8 +1,6 @@
-# MathsTest2024
+# MathsTestCleaned
 
-![Screensoht of the UI](https://github.com/CAG2Mark/MathsTest2024/assets/55091936/153f0406-9ed7-4ed5-9e64-c434b3c7949b)
-
-The 2024 instalment of my yearly maths test. :P
+A cleaned version of my 2024 maths test that serves as a formal demo for my [wasm-math-evaluator](https://github.com/CAG2Mark/wasm-math-evaluator/) library.
 
 As usual, this was made as a joke, but regardless, the project serves as a useful framework for making client-side maths tests. The entire system has been revamped this year to allow greater flexibility in setting up questions, and be more user-friendly for the end-user.
 
