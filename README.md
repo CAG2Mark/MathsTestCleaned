@@ -13,7 +13,7 @@ For each question you want to put in \ your maths test, you need to do the follo
 3. Write the page for that question in HTML.
 
 ## 1. Adding to `questiondata.json`
-In `questiondata.json,` you should add question data to the `questions` array.
+In `questiondata.json`, you should add question data to the `questions` array.
 
 Questions contain the following fields:
 - `name`: The unique name/identifier of the question. This is only used internally and not visible in the user interface.
