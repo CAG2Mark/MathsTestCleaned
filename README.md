@@ -2,7 +2,7 @@
 
 A cleaned version of my 2024 maths test that serves as a formal demo for my [wasm-math-evaluator](https://github.com/CAG2Mark/wasm-math-evaluator/) library.
 
-As usual, this was made as a joke, but regardless, the project serves as a useful framework for making client-side maths tests. The entire system has been revamped this year to allow greater flexibility in setting up questions, and be more user-friendly for the end-user.
+The project serves as a useful framework for making client-side maths tests. The entire system has been revamped this year to allow greater flexibility in setting up questions, and be more user-friendly for the end-user.
 
 # Setting up
 Due to the greater flexibility of this new framework, it is a bit more complicated to set up than before.
